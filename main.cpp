@@ -85,13 +85,15 @@ int main(int argc, char const *argv[])
                 << buffer
                 << "\n'''"
                 << std::endl;
-            //if ("exit" == command_string) run = false;
-            //send(sock, &buf, readden, 0);
+            std::string command_string = {buffer, 0, recv_len};    
+            if ("exit" == command_string) 
+            EXIT_SUCCESS;
+            send(sock, buffer, recv_len, 0);
 
-/*            std::string command_string = {buffer, 0, len};
+            
             rtrim(command_string);
             std::cout << command_string << std::endl;
-*/
+
             // Send same content back to the client ("echo").
             sendto(sock, buffer, recv_len, 0, reinterpret_cast<const sockaddr *>(&client_address),
                    client_address_len);
